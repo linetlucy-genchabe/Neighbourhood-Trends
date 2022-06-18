@@ -11,7 +11,7 @@ from django.http import HttpResponse, Http404
 # Create your models here.
    
 
-class Neighborhood(models.Model):
+class Neighbourhood(models.Model):
     name = models.CharField(max_length=255)
     location = models.CharField(max_length=255)
     occupants_count = models.IntegerField()
@@ -20,19 +20,19 @@ class Neighborhood(models.Model):
     country = CountryField(blank_label='(select country)', default='NG')
 
         
-    def save_neighborhood(self):
+    def save_neighbourhood(self):
         self.save()
     
-    def delete_neighborhood(self):
+    def delete_neighbourhood(self):
         self.delete()
         
     @classmethod
-    def get_neighborhoods(cls):
+    def get_neighbourhoods(cls):
         projects = cls.objects.all()
         return projects
     
     @classmethod
-    def search_neighborhoods(cls, search_term):
+    def search_neighbourhoods(cls, search_term):
         projects = cls.objects.filter(name__icontains=search_term)
         return projects
     
@@ -44,9 +44,9 @@ class Neighborhood(models.Model):
     
     
     @classmethod
-    def get_neighborhood(request, neighborhood):
+    def get_neighbourhood(request, neighborhood):
         try:
-            project = Neighborhood.objects.get(pk = id)
+            project = Neighbourhood.objects.get(pk = id)
             
         except ObjectDoesNotExist:
             raise Http404()
@@ -58,14 +58,14 @@ class Neighborhood(models.Model):
     
     class Meta:
         ordering = ['-pub_date']
-        verbose_name = 'My Neighborhood'
-        verbose_name_plural = 'Neighborhoods'
+        verbose_name = 'My Neighbourhood'
+        verbose_name_plural = 'Neighbourhoods'
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.TextField(blank=True)
     photo = CloudinaryField('image')
-    neighborhood = models.ForeignKey(Neighborhood,on_delete=models.CASCADE, blank=True, default='1')
+    neighbourhood = models.ForeignKey(Neighbourhood,on_delete=models.CASCADE, blank=True, default='1')
 
     def save_profile(self):
         self.save()
@@ -90,7 +90,7 @@ class Business(models.Model):
     Admin = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
     admin_profile = models.ForeignKey(Profile,on_delete=models.CASCADE, blank=True, default='1')
     address = models.TextField()
-    neighborhood = models.ForeignKey(Neighborhood,on_delete=models.CASCADE, blank=True, default='1')
+    neighbourhood = models.ForeignKey(Neighbourhood,on_delete=models.CASCADE, blank=True, default='1')
 
     
     def save_business(self):
@@ -110,8 +110,8 @@ class Business(models.Model):
         return business
     
     @classmethod
-    def get_by_neighborhood(cls, neighborhoods):
-        business = cls.objects.filter(neighborhood__name__icontains=neighborhoods)
+    def get_by_neighbourhood(cls, neighbourhoods):
+        business = cls.objects.filter(neighbourhood__name__icontains=neighbourhoods)
         return business
     
     @classmethod
@@ -136,7 +136,7 @@ class Business(models.Model):
 class Posts(models.Model):
     post = models.TextField()
     pub_date = models.DateTimeField(auto_now_add=True)    
-    neighborhood = models.ForeignKey(Neighborhood,on_delete=models.CASCADE)
+    neighbourhood = models.ForeignKey(Neighbourhood,on_delete=models.CASCADE)
     Author = models.ForeignKey(User, on_delete=models.CASCADE)
     author_profile = models.ForeignKey(Profile,on_delete=models.CASCADE)
 
@@ -153,8 +153,8 @@ class Posts(models.Model):
         return posts
     
     @classmethod
-    def get_by_neighborhood(cls, neighborhoods):
-        posts = cls.objects.filter(neighborhood__name__icontains=neighborhoods)
+    def get_by_neighbourhood(cls, neighbourhoods):
+        posts = cls.objects.filter(neighbourhood__name__icontains=neighbourhoods)
         return posts
     
     def __str__(self):
