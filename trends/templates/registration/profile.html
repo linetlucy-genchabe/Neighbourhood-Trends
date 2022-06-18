@@ -17,11 +17,11 @@
                 <h4> <span class="font-weight-bold"> Username:</span>  {{user.username}} </h4>
         <p> <span class="font-weight-bold"> Email:</span>  {{user.email}} </p>
         <p> <span class="font-weight-bold"> Bio:</span> {{ user.profile.bio}}  </p>
-        <p> <span class="font-weight-bold"> Neighborhood:</span> {{ user.profile.neighborhood.name}}  </p>
-        <p> <span class="font-weight-bold"> Location:</span> {{ user.profile.neighborhood.location}}  </p>
-        <p> <span class="font-weight-bold"> Country:</span> {{ user.profile.neighborhood.country.name}}  </p>
+        <p> <span class="font-weight-bold"> Neighborhood:</span> {{ user.profile.neighbourhood.name}}  </p>
+        <p> <span class="font-weight-bold"> Location:</span> {{ user.profile.neighbourhood.location}}  </p>
+        <p> <span class="font-weight-bold"> Country:</span> {{ user.profile.neighbourhood.country.name}}  </p>
         <button class="btn btn-md btn-outline-info font-weight-bold" data-toggle="modal" data-target="#profile"> Edit Profile</button>
-        <button class="btn btn-md btn-outline-info font-weight-bold" data-toggle="modal" data-target="#neighborhood"> New Neighborhood</button>
+        <button class="btn btn-md btn-outline-info font-weight-bold" data-toggle="modal" data-target="#neighborhood"> New Neighbourhood</button>
         </div>
         <hr>
        
@@ -73,7 +73,7 @@
 
       <!-- start of Neighborhood form  -->
 
-      <div class="modal fade" id="neighborhood" tabindex="-1" role="dialog" aria-labelledby="exampleModal3Label" aria-hidden="true">
+      <div class="modal fade" id="neighbourhood" tabindex="-1" role="dialog" aria-labelledby="exampleModal3Label" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -86,14 +86,14 @@
               
                  <div>
                   <!-- neighboorhood update form  -->
-                        <h4 class="font-weight-bold">New Neighborhood</h4>
+                        <h4 class="font-weight-bold">New Neighbourhood</h4>
                         <hr class="">
                         <form  method="post">
                         {% csrf_token %}
                         {% bootstrap_form form2 %}
 
                         <div class="form-group">
-                        <button type="submit" class="btn blue-gradient btn-lg mt-2 font-weight-bold btn-block"> Add Neighborhood </button>
+                        <button type="submit" class="btn blue-gradient btn-lg mt-2 font-weight-bold btn-block"> New Neighbourhood </button>
                         </div>
 
                         <input type="hidden" name="next" value="{{next}}">
