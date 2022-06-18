@@ -9,7 +9,7 @@
 
     <div class="col-lg-8 mt-4 pt-2 ">
             <div class="pb-2">
-                {% if user.profile.photo %}
+                {% if user.user_profiles.photo %}
             <img src="{{ user.profile.photo.url }}" alt="" class="d-flex justify-content-start rounded-circle mb-1 img-fluid mr-1" style="width: 200px;">
             {% else %}
             <img src="https://source.unsplash.com/1600x900/?user,profile" alt="" class="d-flex justify-content-start rounded-circle mb-1 img-fluid mr-1" style="width: 150px;">
@@ -34,7 +34,7 @@
 </div>
 
 <!-- Modal starts here -->
-<div class="modal fade" id="profile" tabindex="-1" role="dialog" aria-labelledby="exampleModal3Label" aria-hidden="true">
+<!-- <div class="modal fade" id="profile" tabindex="-1" role="dialog" aria-labelledby="exampleModal3Label" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -46,7 +46,7 @@
             <div class="modal-body">
               
                  <div>
-                  <!-- profile update form  -->
+                   profile update form  
                         <h4 class="font-weight-bold">Update Your Profile</h4>
                         <hr class="">
                         <form  method="post" enctype="multipart/form-data">
@@ -65,48 +65,12 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary btn-md" data-dismiss="modal">Close</button>
-              <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+               <button type="button" class="btn btn-primary">Save changes</button> 
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
 
-      <!-- start of Neighborhood form  -->
-
-      <div class="modal fade" id="neighbourhood" tabindex="-1" role="dialog" aria-labelledby="exampleModal3Label" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModal3Label"></h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              
-                 <div>
-                  <!-- neighboorhood update form  -->
-                        <h4 class="font-weight-bold">New Neighbourhood</h4>
-                        <hr class="">
-                        <form  method="post">
-                        {% csrf_token %}
-                        {% bootstrap_form form2 %}
-
-                        <div class="form-group">
-                        <button type="submit" class="btn blue-gradient btn-lg mt-2 font-weight-bold btn-block"> New Neighbourhood </button>
-                        </div>
-
-                        <input type="hidden" name="next" value="{{next}}">
-
-                    </form>
-                </div>
       
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary btn-md" data-dismiss="modal">Close</button>
-              <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
-            </div>
-          </div>
-        </div>
-      </div>
+</div>
 {% endblock %}
