@@ -87,39 +87,7 @@ def user_profiles(request):
     return render (request, 'registration/profile.html', {'users':users})
 
 
-# @login_required(login_url='/accounts/login/')
-# def user_profiles(request):
-#     current_user = request.user
-#     profile = request.user.profile
-    
-#     if request.method == 'POST':
-#         form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
-#         form2 = NewNeighbourhoodForm(request.POST)
-        
-#         if form2.is_valid():
-#             neighbourhood = form2.save(commit=False)
-#             neighbourhood.Admin = current_user
-#             neighbourhood.admin_profile = profile
-#             neighbourhood.save()
-#             return redirect('profile')
-        
-#         if form.is_valid():
-#             profile = form.save(commit=False)
-#             profile.save()
-#             return redirect('profile')
-            
-#     else:
-#         form = ProfileUpdateForm()
-#         form2 = NewNeighbourhoodForm()
 
-#     return render(request, 'registration/profile.html', {"form":form, "form2":form2})
-
-# @login_required(login_url='/accounts/login/')
-# def  user_profiles(request):
-#     user = request.user
-#     my_profile = Profile.objects.get(user=user)
-#     print(my_profile)
-#     return render(request,"profile.html",{'my_profile':my_profile,'user':user})
 
 @login_required(login_url='/accounts/login/')
 def search_businesses(request):
