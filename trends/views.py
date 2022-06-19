@@ -22,7 +22,7 @@ def index(request):
     all_neighbourhoods = Neighbourhood.get_neighbourhoods()
     
     
-    if 'neighborhood' in request.GET and request.GET["neighbourhood"]:
+    if 'neighbourhood' in request.GET and request.GET["neighbourhood"]:
         neighbourhoods = request.GET.get("neighbourhood")
         searched_neighbourhood = Business.get_by_neighbourhood(neighbourhoods)
         all_posts = Posts.get_by_neighbourhood(neighbourhoods)
@@ -30,7 +30,7 @@ def index(request):
         all_neighbourhoods = Neighbourhood.get_neighbourhoods()        
         
         return render(request, 'index.html', {"message":message,"location": searched_neighbourhood,
-                                               "all_neighborhoods":all_neighbourhoods, "all_posts":all_posts})
+                                               "all_neighbourhoods":all_neighbourhoods, "all_posts":all_posts})
 
     else:
         message = "No Neighborhood Found!"
@@ -78,14 +78,41 @@ def signout(request):
     return redirect("/")
 
 
-def user_profiles(request):
-    users= User.objects.all()
-    current_user = request.user
-    # user_posts = Posts.objects.filter(author=current_user)
-    # print(user_posts)
+# def user_profiles(request):
+#     users= User.objects.all()
+#     current_user = request.user
+#     # user_posts = Posts.objects.filter(author=current_user)
+#     # print(user_posts)
     
-    return render (request, 'registration/profile.html', {'users':users})
+#     return render (request, 'registration/profile.html', {'users':users})
 
+
+@login_required(login_url='/accounts/login/')
+def user_profiles(request):
+    current_user = request.user
+    profile = User.objects.all()
+    
+    if request.method == 'POST':
+        form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
+        form2 = NewNeighbourhoodForm(request.POST)
+        
+        if form2.is_valid():
+            neighborhood = form2.save(commit=False)
+            neighborhood.Admin = current_user
+            neighborhood.admin_profile = profile
+            neighborhood.save()
+            return redirect('profile')
+        
+        if form.is_valid():
+            profile = form.save(commit=False)
+            profile.save()
+            return redirect('profile')
+            
+    else:
+        form = ProfileUpdateForm()
+        form2 = NewNeighbourhoodForm()
+
+    return render(request, 'registration/profile.html', {"form":form, "form2":form2})
 
 
 
@@ -117,7 +144,7 @@ def get_business(request, id):
 def new_post(request):
     current_user = request.user
     profile = request.user.profile
-    neighborhood = request.user.profile.neighborhood
+    neighbourhood = request.user.profile.neighbourhood
 
     if request.method == 'POST':
         form = NewPostForm(request.POST)
@@ -125,7 +152,7 @@ def new_post(request):
             post = form.save(commit=False)
             post.Author = current_user
             post.author_profile = profile
-            post.neighborhood = neighborhood
+            post.neighbourhood = neighbourhood
             post.save()
         return redirect('index')
 
