@@ -44,7 +44,7 @@ class Neighbourhood(models.Model):
     
     
     @classmethod
-    def get_neighbourhood(request, neighborhood):
+    def get_neighbourhood(request, neighbourhood):
         try:
             project = Neighbourhood.objects.get(pk = id)
             
