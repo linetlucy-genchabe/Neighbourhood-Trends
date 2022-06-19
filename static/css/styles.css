@@ -6,7 +6,7 @@ h1 {
 }
 
 
-header {
+/* header {
     background: linear-gradient(180deg, rgb(255, 255, 255), rgb(23, 14, 37));
     font-size: 25px;
     padding: 15% 10%;
@@ -23,4 +23,4 @@ header h1 span {
 
 header h1 span:hover {
     color: rgb(233, 8, 83);
-}
+} */

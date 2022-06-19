@@ -53,6 +53,7 @@ def user_login(request):
 
 
 def register(request):
+    
     if request.method =='POST':
         first_name = request.POST['first_name']
         last_name = request.POST['last_name']
@@ -68,6 +69,7 @@ def register(request):
         new_user = User.objects.create_user(first_name=first_name,last_name=last_name,username=username,email=email,password=password1)
         
         new_user.save()
+        
         return render(request,'registration/login.html')
     return render(request, 'registration/registration.html')
 
@@ -78,41 +80,34 @@ def signout(request):
     return redirect("/")
 
 
-# def user_profiles(request):
-#     users= User.objects.all()
-#     current_user = request.user
-#     # user_posts = Posts.objects.filter(author=current_user)
-#     # print(user_posts)
-    
-#     return render (request, 'registration/profile.html', {'users':users})
-
-
 @login_required(login_url='/accounts/login/')
 def user_profiles(request):
     current_user = request.user
-    profile = User.objects.all()
+    profile = Profile.objects.get(user=request.user)
+    # profile = request.user.profile
     
     if request.method == 'POST':
-        form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
+        form = ProfileUpdateForm(request.POST, request.FILES,instance=request.user.profile)
         form2 = NewNeighbourhoodForm(request.POST)
         
         if form2.is_valid():
-            neighborhood = form2.save(commit=False)
-            neighborhood.Admin = current_user
-            neighborhood.admin_profile = profile
-            neighborhood.save()
+            neighbourhood = form2.save(commit=False)
+            neighbourhood.Admin = current_user
+            neighbourhood.admin_profile = profile
+            neighbourhood.save()
             return redirect('profile')
         
         if form.is_valid():
             profile = form.save(commit=False)
             profile.save()
+            form.save()
             return redirect('profile')
             
     else:
         form = ProfileUpdateForm()
         form2 = NewNeighbourhoodForm()
 
-    return render(request, 'registration/profile.html', {"form":form, "form2":form2})
+    return render(request, 'registration/profile.html', {"form":form, "form2":form2,})
 
 
 
