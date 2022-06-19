@@ -4,15 +4,15 @@
 <div style="height: 100%;">
   <div class="">
     {% if businesses %}
-    <div class="jumbotron jumbotron-fluid bg-info">
+    <div class="jumbotron jumbotron-fluid bg-white shadow">
         <div class="">
-          <h2 class="display-6 text-center font-weight-bold">Found {{ businesses|length }} business for searched term {{message}}</h2>
+          <h1 class="display-6 text-center font-weight-bold">Found {{ businesses|length }} business for searched term {{message}}</h1>
         </div>
       </div>
     {% else %}
-    <div class="jumbotron jumbotron-fluid bg-light">
+    <div class="jumbotron jumbotron-fluid bg-white shadow">
         <div class="">
-          <h2 class="display-5 text-center font-weight-bold">Found 0 business for the searched term {{message}}</h2>
+          <h1 class="display-5 text-center font-weight-bold">Found 0 business for the searched term {{message}}</h1>
         </div>
       </div>
     {% endif %}
@@ -37,7 +37,7 @@
                       
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody >
                       {% for business in businesses %}
                     <tr>
                       <td>{{business.name}}</td>
