@@ -62,12 +62,13 @@ class Neighbourhood(models.Model):
         verbose_name_plural = 'Neighbourhoods'
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User,related_name='profile', on_delete=models.CASCADE)
     bio = models.TextField(blank=True)
     photo = CloudinaryField('image')
     neighbourhood = models.ForeignKey(Neighbourhood,on_delete=models.CASCADE, blank=True, default='1')
 
     def save_profile(self):
+        
         self.save()
         
         

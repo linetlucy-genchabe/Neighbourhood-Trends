@@ -85,6 +85,7 @@ def user_profiles(request):
     current_user = request.user
     profile = Profile.objects.get(user=request.user)
     # profile = request.user.profile
+      
     
     if request.method == 'POST':
         form = ProfileUpdateForm(request.POST, request.FILES,instance=request.user.profile)
