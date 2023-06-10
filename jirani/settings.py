@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     'trends.apps.TrendsConfig',
     'bootstrap5',
     'cloudinary',
-    'tinymce',
+    "tinymce",
     'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -97,8 +97,8 @@ DATABASES = {
     'default': {
     'ENGINE': 'django.db.backends.postgresql',
     'NAME': 'trendsdb',
-    'USER': 'lynne',
-    'PASSWORD':'lynne2022',
+    'USER': 'postgres',
+    'PASSWORD':'lynne',
     }
 }
 
