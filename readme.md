@@ -5,9 +5,6 @@ Linetlucy Genchabe
 ## Description
 This is a web application that allows you to be in the loop about everything happening in your neighborhood. From contact information of different handyman to meeting announcements or even alerts.
 
-## Admin
-* username: lynne
-* password: linet.2211
 
 ## User Stories
 
